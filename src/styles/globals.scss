@@ -8,13 +8,11 @@
   --btn-color: #201f1f;
   --btn-color-active: #fbfbff;
   --btn-bg: #eaeef7;
-  --btn-bg-active: linear-gradient(
-    165.54deg,
-    #141333 -33.39%,
-    #202261 15.89%,
-    #543c97 55.84%,
-    #6939a2 74.96%
-  );
+  --btn-bg-active: linear-gradient(165.54deg,
+      #141333 -33.39%,
+      #202261 15.89%,
+      #543c97 55.84%,
+      #6939a2 74.96%);
 
   --mobile: 768px;
 }
@@ -46,6 +44,16 @@ a {
 ul {
   padding: 0;
   list-style: none;
+}
+
+input,
+select {
+  padding: 12px 20px;
+  background: var(--white);
+  border: 1px solid var(--border-grey);
+  box-shadow: 2px 2px 6px 0px #543C9740;
+  border-radius: 16px;
+  outline: unset;
 }
 
 main {
