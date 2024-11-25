@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import surveySlice from '../slices/surveySlice';
+import surveySlice from './surveySlice';
 
 export const store = configureStore({
   reducer: {
