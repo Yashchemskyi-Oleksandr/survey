@@ -4,7 +4,7 @@
   padding: 15px 25px;
   max-width: 1200px;
   margin: 0 auto;
-  background: var(--background);
+  background: var(--main-background);
 
   @media only screen and (max-width: 768px) {
     padding: 10px 15px;
@@ -18,6 +18,8 @@
   }
 
   .backButton {
+    position: absolute;
+    left: 20px;
     padding: 5px;
     background: transparent;
     box-shadow: unset;
