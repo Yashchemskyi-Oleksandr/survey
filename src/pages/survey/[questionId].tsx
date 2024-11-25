@@ -1,13 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SurveyLayout from '@/components/layouts/SurveyLayout';
 import { QuestionProps } from '@/types/surveyTypes';
+import Question from '@/page-components/Question/Question';
 import surveyConfig from '../../config/survey.json';
 
 const QuestionPage = ({ currentQuestion, initialQuestionId }: QuestionProps) => (
-  <div>
-    {JSON.stringify(initialQuestionId)}
-    {JSON.stringify(currentQuestion)}
-  </div>
+  <Question
+    currentQuestion={currentQuestion}
+    initialQuestionId={initialQuestionId}
+  />
 );
 
 export default QuestionPage;
