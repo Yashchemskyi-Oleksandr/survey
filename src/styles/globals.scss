@@ -1,6 +1,22 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --white: #fff;
+
+  --main-text-color: #333;
+  --main-background: #fff0f0;
+
+  --border-grey: #e0e0e0;
+  --btn-color: #201f1f;
+  --btn-color-active: #fbfbff;
+  --btn-bg: #eaeef7;
+  --btn-bg-active: linear-gradient(
+    165.54deg,
+    #141333 -33.39%,
+    #202261 15.89%,
+    #543c97 55.84%,
+    #6939a2 74.96%
+  );
+
+  --mobile: 768px;
 }
 
 html,
@@ -11,7 +27,7 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--main-background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -19,7 +35,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  color: #333;
+  color: var(--main-text-color);
 }
 
 a {
@@ -34,4 +50,30 @@ ul {
 
 main {
   height: 100vh;
+}
+
+button {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  color: var(--btn-color);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  border: unset;
+}
+
+.button {
+  box-shadow: 2px 2px 6px 0px #543c9740;
+  padding: 12px 20px;
+  border: 1px solid var(--border-grey);
+  width: 100%;
+  background: var(--btn-bg);
+
+  &.active,
+  &:hover,
+  &:active {
+    color: var(--btn-color-active);
+    background: var(--btn-bg-active);
+  }
 }

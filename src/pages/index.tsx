@@ -19,7 +19,14 @@ export default function Home() {
         />
       </Head>
       <div>
-        <main>home</main>
+        <main>
+          <button
+            className='button'
+            type='button'
+          >
+            button
+          </button>
+        </main>
       </div>
     </>
   );
