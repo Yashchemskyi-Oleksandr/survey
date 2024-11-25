@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '@/components/Button';
+import { Answers } from '@/types/surveyTypes';
 import styles from './Results.module.scss';
 
-const Results = ({ answers }: { answers: Record<string, string> }) => (
+const Results = ({ answers }: { answers: Answers }) => (
   <section className={styles.results}>
     {Object.keys(answers).length ? (
       <>

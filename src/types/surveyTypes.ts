@@ -1,6 +1,8 @@
 import { Component } from '@/components/RenderComponent/RenderComponent';
 
-export type INext = string | Record<string, string>;
+export type Answers = Record<string, string>;
+
+export type INext = string | Answers;
 
 export enum QuestionType {
   singleChoice = 'singleChoice',

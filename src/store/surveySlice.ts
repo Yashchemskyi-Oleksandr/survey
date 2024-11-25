@@ -1,7 +1,8 @@
+import { Answers } from '@/types/surveyTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SurveyState {
-  answers: Record<string, string>;
+  answers: Answers;
   questionHistory: string[];
 }
 

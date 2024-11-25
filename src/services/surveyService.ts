@@ -1,4 +1,4 @@
-import { INext } from '@/types/surveyTypes';
+import { Answers, INext } from '@/types/surveyTypes';
 
 export const getNextQuestionId = ({
   answer,
@@ -7,7 +7,7 @@ export const getNextQuestionId = ({
   next,
 }: {
   answer: string;
-  answers: Record<string, string>;
+  answers: Answers;
   dependsOn?: string;
   next: INext
 
