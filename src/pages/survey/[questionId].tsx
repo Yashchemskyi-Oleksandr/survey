@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import SurveyLayout from '@/components/layouts/SurveyLayout';
 import { QuestionProps } from '@/types/surveyTypes';
 import Question from '@/page-components/Question/Question';
-import surveyConfig from '../../config/survey.json';
+import { surveyConfig } from '@/config';
 
 const QuestionPage = ({ currentQuestion, initialQuestionId }: QuestionProps) => (
   <Question

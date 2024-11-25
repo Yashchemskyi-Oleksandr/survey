@@ -76,5 +76,6 @@ module.exports = {
     window: true,
     document: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'src/config'],
+
 };

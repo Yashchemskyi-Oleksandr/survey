@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import PageLayout from '@/components/layouts/PageLayout';
 import Welcome from '@/page-components/Welcome/Welcome';
-import surveyConfig from '../config/survey.json';
+import { surveyConfig } from '@/config';
 
 export default function WelcomePage() {
   const [surveyTitle, setSurveyTitle] = useState<string>('');
