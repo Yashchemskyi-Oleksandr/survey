@@ -1,3 +1,4 @@
+import PageLayout from '@/components/layouts/PageLayout';
 import Head from 'next/head';
 
 export default function Home() {
@@ -31,3 +32,5 @@ export default function Home() {
     </>
   );
 }
+
+Home.getLayout = (page: React.ReactNode) => <PageLayout>{page}</PageLayout>;
