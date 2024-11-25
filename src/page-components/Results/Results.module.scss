@@ -1,0 +1,12 @@
+.results {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &,
+    &_list {
+        display: grid;
+        justify-content: center;
+        gap: 20px;
+    }
+}
