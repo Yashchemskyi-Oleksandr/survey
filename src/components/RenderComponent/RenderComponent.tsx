@@ -2,7 +2,6 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Select from '@/components/Select';
 import Checkbox from '@/components/Checkbox';
-import { useState } from 'react';
 import styles from './RenderComponent.module.scss';
 
 interface InputComponentProps {
@@ -46,19 +45,8 @@ const RenderComponent = ({
   nextQuestion,
   showNextButton,
 }: RenderComponentProps) => {
-  const [localAnswer, setLocalAnswer] = useState<string>('');
   const setValue = (answer: string) => {
-    setLocalAnswer(answer);
     setAnswer(answer);
-  };
-
-  const redirectHandler = () => {
-    if (!localAnswer) {
-      // eslint-disable-next-line no-alert
-      alert('Please complete question');
-    } else {
-      nextQuestion();
-    }
   };
   const componentOptions = component?.options?.length ? component?.options : [];
 
@@ -99,7 +87,7 @@ const RenderComponent = ({
         </>
       ) : null}
       {showNextButton && (
-      <Button onClick={redirectHandler}>
+      <Button onClick={nextQuestion}>
         Next
       </Button>
       )}

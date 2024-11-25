@@ -28,3 +28,8 @@ export const getNextQuestionId = ({
 
   return '';
 };
+
+export const formatQuestion = (question: string, answers: Answers) => {
+  if (!question) return '';
+  return question.replace(/\{(\w+)\}/g, (_, key) => answers[key] || '');
+};

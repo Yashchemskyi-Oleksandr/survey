@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import RenderComponent from '@/components/RenderComponent/RenderComponent';
-import { getNextQuestionId } from '@/services/surveyService';
+import { formatQuestion, getNextQuestionId } from '@/services/surveyService';
 import {
   getAnswers, resetSurvey, setAnswer, setQuestionIdToHistory,
 } from '@/store/surveySlice';
 import { QuestionProps, QuestionType } from '@/types/surveyTypes';
+import { toast } from 'react-toastify';
 import styles from './Question.module.scss';
 
 const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
@@ -16,8 +17,12 @@ const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
   const answers = useSelector(getAnswers);
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [textValue, setTextValue] = useState<string>('');
+
   const isMultiChoice = [QuestionType.multiChoice].includes(currentQuestion.type);
   const showNextButton = [QuestionType.multiChoice, QuestionType.text].includes(currentQuestion.type);
+  const isTextType = [QuestionType.text].includes(currentQuestion.type);
+  const answerNotSelected = (isTextType && !textValue) || (isMultiChoice && !selectedOptions.length);
 
   const redirectAnswer = (nextQuestionId: string) => {
     if (nextQuestionId) {
@@ -28,8 +33,7 @@ const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
         dispatch(setQuestionIdToHistory(currentQuestion.id));
       }
     } else {
-      // eslint-disable-next-line no-alert
-      alert('No valid next question found!');
+      toast.warn('No valid next question found!');
       router.push('/');
       dispatch(resetSurvey());
     }
@@ -43,12 +47,20 @@ const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
   }, [router, initialQuestionId]);
 
   const handleAnswer = (answer: string) => {
+    if (answerNotSelected) {
+      toast.warn('Please complete question');
+      return;
+    }
     dispatch(setAnswer({ questionId: currentQuestion.id, answer }));
 
     const nextQuestionId = getNextQuestionId({
       answer, answers, dependsOn: currentQuestion.dependsOn, next: currentQuestion.next,
     });
     redirectAnswer(nextQuestionId);
+  };
+
+  const handleTextAnswer = (answer: string) => {
+    setTextValue(answer);
   };
 
   const handleMultiAnswers = (answer: string) => {
@@ -59,14 +71,10 @@ const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
     );
   };
 
-  const formatQuestion = (question: string) => {
-    if (!question) return '';
-    return question.replace(/\{(\w+)\}/g, (_, key) => answers[key] || '');
-  };
   return (
     <section className={styles.survey}>
       <div className={styles.survey_question}>
-        <h1 className={styles.title}>{formatQuestion(currentQuestion.question)}</h1>
+        <h1 className={styles.title}>{formatQuestion(currentQuestion.question, answers)}</h1>
         {currentQuestion.quote && <p className={styles.quote}>{currentQuestion.quote}</p>}
       </div>
       {currentQuestion?.component && (
@@ -77,6 +85,8 @@ const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
         setAnswer={(answer: string) => {
           if (isMultiChoice) {
             handleMultiAnswers(answer);
+          } else if (isTextType) {
+            handleTextAnswer(answer);
           } else {
             handleAnswer(answer);
           }
@@ -85,8 +95,9 @@ const Question = ({ currentQuestion, initialQuestionId }: QuestionProps) => {
           if (isMultiChoice) {
             handleAnswer(selectedOptions.join(', '));
             setSelectedOptions([]);
-          } else {
-            handleAnswer(currentQuestion.next as string);
+          } else if (isTextType) {
+            handleAnswer(textValue);
+            setTextValue('');
           }
         }}
       />

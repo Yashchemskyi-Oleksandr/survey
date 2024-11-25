@@ -10,10 +10,7 @@ const Input: React.FC<InputProps> = ({ placeholder, onChange }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-  };
-
-  const handleBlur = () => {
-    onChange(value);
+    onChange(e.target.value);
   };
 
   return (
@@ -22,7 +19,6 @@ const Input: React.FC<InputProps> = ({ placeholder, onChange }) => {
       placeholder={placeholder}
       value={value}
       onChange={handleChange}
-      onBlur={handleBlur}
     />
   );
 };
